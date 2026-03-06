@@ -278,7 +278,7 @@ Normaliza os valores para estabilizar o modelo.
 # Parte 10 — Self Attention
 
 ```python
-def self_attention(X, d_model):
+def mecanismo_atencao(X, d_model):
 ```
 
 O **Self-Attention** permite que cada palavra observe todas as outras palavras da frase.
