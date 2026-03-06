@@ -17,9 +17,6 @@ entrada_embeddings = matriz_identidade_visual[tokens_ids]
 
 X = np.expand_dims(entrada_embeddings, axis=0) 
 
-print("=== Processamento de Linguagem Natural ===")
-print(f"Frase original: '{frase_exemplo}'")
-print(f"Tokens (IDs): {tokens_ids}")
 print("\n--- Tabela de Vocabulário ---")
 print(vocabulario_df.to_string(index=False))
 
@@ -60,17 +57,6 @@ def rede_feed_forward(x, d_model, d_ff=256):
     
     intermediario = np.maximum(0, x @ W1 + b1)
     return intermediario @ W2 + b2
-
-def bloco_encoder(X, d_model):
-    print(f"Entrada original: {X.shape}")
-    
-    atencao_saida = mecanismo_atencao(X, d_model)
-    x_pos_atencao = camada_normalizacao(X + atencao_saida)
-    ff_saida = rede_feed_forward(x_pos_atencao, d_model)
-    x_final = camada_normalizacao(x_pos_atencao + ff_saida)
-    
-    return x_final
-
 
 N = 6 
 d_model = 64 
