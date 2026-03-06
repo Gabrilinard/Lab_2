@@ -70,3 +70,22 @@ def bloco_encoder(X, d_model):
     x_final = camada_normalizacao(x_pos_atencao + ff_saida)
     
     return x_final
+
+
+N = 6 
+d_model = 64 
+
+print(f"--- Iniciando o Encoder Stack (N={N}) ---")
+
+for i in range(N):
+    X_att = mecanismo_atencao(X, d_model)
+    X_norm1 = camada_normalizacao(X + X_att)
+    X_ffn = rede_feed_forward(X_norm1, d_model)
+    X_out = camada_normalizacao(X_norm1 + X_ffn)
+    X = X_out
+    
+    print(f"Camada {i+1}: Shape mantido em {X.shape}")
+
+Vetor_Z = X
+print(f"\nValidação do Shape final do Vetor Z: {Vetor_Z.shape}")
+print(f"Amostra dos primeiros 5 valores (features) da primeira palavra:\n{Vetor_Z[0, 0, :5]}")
